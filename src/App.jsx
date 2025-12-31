@@ -1,4 +1,5 @@
  import React, { useState } from "react";
+import { Container, Typography, Box } from "@mui/material";
 import SearchBox from "./components/SearchBox";
 import WordDetails from "./components/WordDetails";
 import { getWord } from "./Service/api";
@@ -17,11 +18,15 @@ function App() {
   };
 
   return (
-    <div style={{ padding: 40 }}>
-      <h2>📘 Dictionary App</h2>
+    <Container maxWidth="md" sx={{ py: 4 }}>
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h3" component="h1" sx={{ fontWeight: "bold", mb: 2 }}>
+          📘 Dictionary App
+        </Typography>
+      </Box>
       <SearchBox onSearch={searchWord} />
       <WordDetails data={data} />
-    </div>
+    </Container>
   );
 }
 
