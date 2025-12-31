@@ -1,5 +1,4 @@
-import React from "react";
-import { Card, Typography } from "@mui/material";
+ import React from "react";
 
 const WordDetails = ({ data }) => {
   if (!data) return null;
@@ -7,18 +6,18 @@ const WordDetails = ({ data }) => {
   const wordData = data[0];
 
   return (
-    <Card sx={{ padding: 3 }}>
-      <Typography variant="h4">{wordData.word}</Typography>
-      <Typography color="gray">
-        {wordData.phonetic}
-      </Typography>
+    <div style={{ marginTop: "20px" }}>
+      <h2>{wordData.word}</h2>
+
+      {wordData.phonetic && (
+        <p>
+          <b>Phonetic:</b> {wordData.phonetic}
+        </p>
+      )}
 
       {wordData.meanings.map((meaning, index) => (
         <div key={index}>
-          <Typography variant="h6">
-            {meaning.partOfSpeech}
-          </Typography>
-
+          <h4>{meaning.partOfSpeech}</h4>
           <ul>
             {meaning.definitions.map((def, i) => (
               <li key={i}>{def.definition}</li>
@@ -26,7 +25,7 @@ const WordDetails = ({ data }) => {
           </ul>
         </div>
       ))}
-    </Card>
+    </div>
   );
 };
 

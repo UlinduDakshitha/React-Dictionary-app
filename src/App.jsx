@@ -1,27 +1,34 @@
-import React, { useState } from "react";
+ import React, { useState } from "react";
 import SearchBox from "./components/SearchBox";
 import WordDetails from "./components/WordDetails";
-import { getWordDetails } from "./Service/api";
+import Loader from "./components/Loader";
+import { getWord } from "./Service/api";
 
 function App() {
-  const [wordData, setWordData] = useState(null);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const searchWord = async (word) => {
     try {
-      const response = await getWordDetails(word);
-      setWordData(response.data);
+      setLoading(true);
+      const response = await getWord(word);
+      setData(response.data);
     } catch (error) {
-      console.error("Error fetching word details:", error);
+      console.error("Error fetching word data:", error);
       alert("Word not found!");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={{ padding: 40 }}>
-      <h2>📘 Dictionary App</h2>
+    <div style={{ padding: "40px", fontFamily: "Arial" }}>
+      <h1>📘 Dictionary App</h1>
 
       <SearchBox onSearch={searchWord} />
-      <WordDetails data={wordData} />
+
+      {loading && <Loader />}
+      {!loading && <WordDetails data={data} />}
     </div>
   );
 }

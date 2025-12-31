@@ -4,7 +4,8 @@ const api = axios.create({
   baseURL: "https://api.dictionaryapi.dev/api/v2/entries",
 });
 
-export const getWordDetails = (word) => {
+export const getWord = (word) => {
   return api.get(`/en_US/${word}`);
 };
 
+export default api;

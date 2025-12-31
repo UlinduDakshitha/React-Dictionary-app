@@ -1,32 +1,32 @@
-import React, { useState } from "react";
-import { TextField, Button } from "@mui/material";
+ import React from "react";
 
-const SearchBox = ({ onSearch }) => {
-  const [word, setWord] = useState("");
+const WordDetails = ({ data }) => {
+  if (!data) return null;
 
-  const handleSearch = () => {
-    if (word.trim() !== "") {
-      onSearch(word);
-    }
-  };
+  const wordData = data[0];
 
   return (
-    <div style={{ marginBottom: 20 }}>
-      <TextField
-        label="Enter Word"
-        variant="outlined"
-        value={word}
-        onChange={(e) => setWord(e.target.value)}
-      />
-      <Button
-        variant="contained"
-        sx={{ ml: 2 }}
-        onClick={handleSearch}
-      >
-        Search
-      </Button>
+    <div style={{ marginTop: "20px" }}>
+      <h2>{wordData.word}</h2>
+
+      {wordData.phonetic && (
+        <p>
+          <b>Phonetic:</b> {wordData.phonetic}
+        </p>
+      )}
+
+      {wordData.meanings.map((meaning, index) => (
+        <div key={index}>
+          <h4>{meaning.partOfSpeech}</h4>
+          <ul>
+            {meaning.definitions.map((def, i) => (
+              <li key={i}>{def.definition}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default SearchBox;
+export default WordDetails;
