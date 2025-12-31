@@ -7,14 +7,17 @@ export default function Dictionary() {
   const [word, setWord] = useState("");
   const [meaning, setMeaning] = useState("");
 
-  const loadWords = async () => {
-    const res = await getWords();
-    setWords(res.data);
-  };
-
   useEffect(() => {
     loadWords();
   }, []);
+
+
+
+  const loadWords= async () => {
+    const res =  getWords();
+    setWords(res.data);
+  };
+
 
   const handleSave = async () => {
     await addWord({ word, meaning });
