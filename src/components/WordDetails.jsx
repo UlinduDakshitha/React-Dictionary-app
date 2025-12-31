@@ -3,24 +3,16 @@
 const WordDetails = ({ data }) => {
   if (!data) return null;
 
-  const wordData = data[0];
-
   return (
-    <div style={{ marginTop: "20px" }}>
-      <h2>{wordData.word}</h2>
+    <div>
+      <h2>{data[0].word}</h2>
 
-      {wordData.phonetic && (
-        <p>
-          <b>Phonetic:</b> {wordData.phonetic}
-        </p>
-      )}
-
-      {wordData.meanings.map((meaning, index) => (
-        <div key={index}>
-          <h4>{meaning.partOfSpeech}</h4>
+      {data[0].meanings.map((m, i) => (
+        <div key={i}>
+          <b>{m.partOfSpeech}</b>
           <ul>
-            {meaning.definitions.map((def, i) => (
-              <li key={i}>{def.definition}</li>
+            {m.definitions.map((d, j) => (
+              <li key={j}>{d.definition}</li>
             ))}
           </ul>
         </div>

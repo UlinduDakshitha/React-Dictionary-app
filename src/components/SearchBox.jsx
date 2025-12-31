@@ -1,32 +1,21 @@
- import React from "react";
+ import React, { useState } from "react";
 
-const WordDetails = ({ data }) => {
-  if (!data) return null;
-
-  const wordData = data[0];
+const SearchBox = ({ onSearch }) => {
+  const [word, setWord] = useState("");
 
   return (
-    <div style={{ marginTop: "20px" }}>
-      <h2>{wordData.word}</h2>
-
-      {wordData.phonetic && (
-        <p>
-          <b>Phonetic:</b> {wordData.phonetic}
-        </p>
-      )}
-
-      {wordData.meanings.map((meaning, index) => (
-        <div key={index}>
-          <h4>{meaning.partOfSpeech}</h4>
-          <ul>
-            {meaning.definitions.map((def, i) => (
-              <li key={i}>{def.definition}</li>
-            ))}
-          </ul>
-        </div>
-      ))}
+    <div>
+      <input
+        type="text"
+        placeholder="Enter word"
+        value={word}
+        onChange={(e) => setWord(e.target.value)}
+      />
+      <button onClick={() => onSearch(word)}>
+        Search
+      </button>
     </div>
   );
 };
 
-export default WordDetails;
+export default SearchBox;
