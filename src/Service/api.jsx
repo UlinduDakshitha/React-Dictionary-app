@@ -1,8 +1,10 @@
-import axios from "axios";
+ import axios from "axios";
 
-const API = axios.create({
-  baseURL: "http://localhost:8080/api",
+const api = axios.create({
+  baseURL: "https://api.dictionaryapi.dev/api/v2/entries",
 });
 
-export const getWords = () => API.get("/words");
-export const addWord = (data) => API.post("/words", data);
+export const getWordDetails = (word) => {
+  return api.get(`/en_US/${word}`);
+};
+
